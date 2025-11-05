@@ -9,12 +9,12 @@ const knightMoves = (start, end) => {
     const queue = [[start, 0, `[${start}]`]];
     const visited = new Set([start.toString()]);
     while(queue.length > 0) {
-        const [[x, y], num, steps] = queue.shift();
-        if (x === end[0] && y === end[1]) {
+        const [vertex, num, steps] = queue.shift();
+        if (vertex[0] === end[0] && vertex[1] === end[1]) {
             return `You made it in ${num} moves! Here's your path:\n${steps}`;
         }
         for (const move of moves) {
-            const current = [x + move[0], y + move[1]];
+            const current = [vertex[0] + move[0], vertex[1] + move[1]];
             if (isValid(current) && !visited.has(current.toString())) {
                 visited.add(current.toString());
                 queue.push([current, num + 1, steps + ` -> [${current}]`]);
@@ -24,4 +24,4 @@ const knightMoves = (start, end) => {
     return null;
 }
 
-console.log(knightMoves([0, 0], [7, 7]));
+console.log(knightMoves([0, 0], [3, 3]));
